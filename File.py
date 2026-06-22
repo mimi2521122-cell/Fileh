@@ -53,7 +53,7 @@ def keep_alive():
     print("🟣 Flask Keep-Alive started.")
 
 # ========== BOT CONFIGURATION ==========
-TOKEN = os.environ.get("BOT_TOKEN", '8850525377:AAFQlC9BJJKglkHt9M02zlFFhEK01-b7BVQ')
+TOKEN = os.environ.get("BOT_TOKEN", '8850525377:AAF8AJIqjC-6jcddGDnbY_FD08ntJ_ckHGY')
 OWNER_ID = int(os.environ.get("OWNER_ID", 7308292609))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 7308292609))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", '@kiki20251')
