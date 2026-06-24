@@ -1482,7 +1482,7 @@ def process_redeem_key(message):
     user_id = message.from_user.id
     key = message.text.strip().upper()
     if not key.startswith('DEV-KiKi-'):
-        bot.reply_to(message, "❌ ပုံစံ: <code>DEV-Ki-Ki-XXXX</code>", parse_mode='HTML'); return
+        bot.reply_to(message, "❌ ပုံစံ: <code>DEV-KiKi-XXXX</code>", parse_mode='HTML'); return
     success, msg = redeem_subscription_key(key, user_id)
     bot.reply_to(message, msg, parse_mode='HTML')
 
