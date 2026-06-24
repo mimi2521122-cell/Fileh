@@ -1,27 +1,29 @@
-name: DEV-KiKi Bot Deploy
+name: DEV-KiKi Bot - Deploy
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ main, master ]
+  workflow_dispatch:   # Manually run from GitHub
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install Dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Bot
+      - name: Run Bot in Background
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           OWNER_ID: ${{ secrets.OWNER_ID }}
@@ -29,4 +31,6 @@ jobs:
           ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
         run: |
           nohup python main.py > bot.log 2>&1 &
-          echo "Bot started!"
+          echo "✅ DEV-KiKi Bot started successfully!"
+          sleep 5
+          ps aux | grep python
