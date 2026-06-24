@@ -33,14 +33,20 @@ for module in required_modules:
         if module == 'psutil' and os.path.exists('/data/data/com.termux'):
             subprocess.check_call(['pkg', 'install', 'python-psutil', '-y'])
         else:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", module, "--break-system-packages"])
+            subprocess.check_call([
+    sys.executable,
+    "-m",
+    "pip",
+    "install",
+    module
+])
 
 # ========== FLASK KEEP-ALIVE ==========
 app = Flask('')
 
 @app.route('/')
 def home():
-    return "⚡ DEV-RAW Core - Universal Python & JS Cloud Hosting"
+    return "⚡ DEV-KiKi Core - Universal Python & JS Cloud Hosting"
 
 def run_flask():
     port = int(os.environ.get("PORT", os.environ.get("BOT_PORT", 5000)))
@@ -53,21 +59,21 @@ def keep_alive():
     print("🟣 Flask Keep-Alive started.")
 
 # ========== BOT CONFIGURATION ==========
-TOKEN = os.environ.get("BOT_TOKEN", '8850525377:AAEf1k13YKbFqHHaVNEGhwaO_2vscM6BP3w')
+bot_token = '8850525377:AAEf1k13YKbFqHHaVNEGhwaO_2vscM6BP3w'
 OWNER_ID = int(os.environ.get("OWNER_ID", 7308292609))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 7308292609))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", '@kiki20251')
 
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'devraw_bot.db')
+DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'dev-KiKi_bot.db')
 
-DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628]
-DEFAULT_FORCE_GROUP_ID = -1002236605624
+DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628,-1002409342922]
+DEFAULT_FORCE_GROUP_ID = -1002409342922
 DEFAULT_CHANNEL_LINKS = {
     -1002236605624: "https://t.me/KMM_MOD1",
     -1003068786628: "https://t.me/Sketchware_Beginner_Developer",
-    -1002409342922: "https://t.me/M_MOD1"
+    -1002409342922: "https://t.me/taka1251"
 }
-DEFAULT_GROUP_LINK = "https://t.me/M_MOD1"
+DEFAULT_GROUP_LINK = "https://t.me/taka1251"
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_BOTS_DIR = os.path.join(BASE_DIR, 'upload_bots')
@@ -77,7 +83,7 @@ PREMIUM_USER_LIMIT = 999
 ADMIN_LIMIT = 999
 OWNER_LIMIT = float('inf')
 
-bot = telebot.TeleBot(TOKEN, threaded=True, num_threads=10)
+bot = telebot.TeleBot(bot_token, threaded=True, num_threads=10)
 
 # Global in-memory cache
 bot_scripts = {}
@@ -514,7 +520,7 @@ def get_user_file_limit(user_id):
 # ========== KEY MANAGEMENT ==========
 def generate_subscription_key(days, file_limit):
     random_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
-    key = f"DEVRAW-{random_code}"
+    key = f"DEV-KiKi-{random_code}"
     conn.execute("INSERT INTO subscription_keys (key_value, days_valid, max_uses, used_count, file_limit) VALUES (?,?,1,0,?)",
                  (key, days, file_limit))
     conn.commit()
@@ -959,7 +965,7 @@ def show_main_menu(message, user_id):
     running = sum(1 for fn, _, _ in user_files.get(user_id, []) if is_bot_running(user_id, fn))
     welcome_text = f"""
 ╔══════════════════════════╗
-║   ⚡ <b>DEV-RAW CORE</b> ⚡   ║
+║   ⚡ <b>DEV-KiKi CORE</b> ⚡   ║
 ║  Universal Cloud Hosting  ║
 ╚══════════════════════════╝
 
@@ -1052,7 +1058,7 @@ def handle_text_messages(message):
         bot.send_message(message.chat.id, "📤 သင့် <code>.py</code> သို့မဟုတ် <code>.js</code> ဖိုင်ကိုတင်ပါ", parse_mode='HTML')
     elif text == '📁 ကျွန်ုပ်၏ဖိုင်များ': handle_manage_files(message)
     elif text == '🔑 Key ဖြည့်ရန်':
-        msg = bot.send_message(message.chat.id, "🔑 Key ထည့်ပါ (DEVRAW-XXXXX):")
+        msg = bot.send_message(message.chat.id, "🔑 Key ထည့်ပါ (DEV-KiKi-XXXXX):")
         bot.register_next_step_handler(msg, process_redeem_key)
     elif text == '✨ အဆင့်မြှင့်ရန်': handle_upgrade(message)
     elif text == '👤 ကိုယ်ရေးအချက်အလက်': handle_my_info(message)
@@ -1475,8 +1481,8 @@ def handle_manage_files(message):
 def process_redeem_key(message):
     user_id = message.from_user.id
     key = message.text.strip().upper()
-    if not key.startswith('DEVRAW-'):
-        bot.reply_to(message, "❌ ပုံစံ: <code>DEVRAW-XXXXX</code>", parse_mode='HTML'); return
+    if not key.startswith('DEV-KiKi-'):
+        bot.reply_to(message, "❌ ပုံစံ: <code>DEV-Ki-Ki-XXXX</code>", parse_mode='HTML'); return
     success, msg = redeem_subscription_key(key, user_id)
     bot.reply_to(message, msg, parse_mode='HTML')
 
@@ -1517,7 +1523,7 @@ def handle_callbacks(call):
     elif data.startswith('logs_'): handle_logs_callback(call)
     elif data.startswith('download_'): handle_download_callback(call)
     elif data == 'redeem_key':
-        msg = bot.send_message(call.message.chat.id, "🔑 Key ထည့်ပါ (DEVRAW-XXXXX):")
+        msg = bot.send_message(call.message.chat.id, "🔑 Key ထည့်ပါ (DEV-KiKi-XXXXX):")
         bot.register_next_step_handler(msg, process_redeem_key)
     elif data.startswith('confirm_broadcast_'): handle_confirm_broadcast(call)
     elif data == 'cancel_broadcast':
@@ -1706,7 +1712,7 @@ atexit.register(cleanup)
 
 # ========== MAIN ==========
 if __name__ == '__main__':
-    logger.info("🚀 DEV-RAW Core Starting...")
+    logger.info("🚀 DEV-KiKi Core Starting...")
     keep_alive()
     node_installed = install_nodejs()
     if not node_installed: logger.warning("⚠️ Node.js/npm not available.")
