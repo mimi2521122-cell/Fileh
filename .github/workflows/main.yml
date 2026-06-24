@@ -1,0 +1,59 @@
+name: DEV-KiKi Bot - Deploy & Keep Alive
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    - cron: '0 */6 * * *'   # နာရီတိုင်း ၆ ခါ refresh
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyTelegramBotAPI psutil flask requests
+
+      - name: Check Bot Syntax
+        run: python -m py_compile main.py
+
+      - name: Run Bot (Background)
+        env:
+          OWNER_ID: ${{ secrets.OWNER_ID }}
+          ADMIN_ID: ${{ secrets.ADMIN_ID }}
+          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          nohup python main.py > bot.log 2>&1 &
+          echo "Bot started with PID $!"
+
+      - name: Keep Alive Check
+        run: |
+          echo "✅ DEV-KiKi Bot is running..."
+          ps aux | grep python
+
+      - name: Save Logs
+        if: always()
+        run: cat bot.log || echo "No log file yet"
+
+# Optional: Render / Railway / Fly.io Deployment (Uncomment if needed)
+#   deploy-to-render:
+#     needs: deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: johnwbyrd/update-deployment-action@v1
+#         with:
+#           deployment-id: ${{ secrets.RENDER_DEPLOYMENT_ID }}
