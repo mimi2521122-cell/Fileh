@@ -71,7 +71,7 @@ DEFAULT_FORCE_GROUP_ID = -1002236605624
 DEFAULT_CHANNEL_LINKS = {
     -1002236605624: "https://t.me/KMM_MOD1",
     -1003068786628: "https://t.me/Sketchware_Beginner_Developer",
-    -1002409342922: "https://t.me/M_MOD1"
+    -1002236605624: "https://t.me/M_MOD1"
 }
 DEFAULT_GROUP_LINK = "https://t.me/M_MOD1"
 
