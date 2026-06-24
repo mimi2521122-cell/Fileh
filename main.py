@@ -48,7 +48,7 @@ def keep_alive():
     print("🟣 Flask Keep-Alive started.")
 
 # ========== BOT CONFIG ==========
-bot_token = os.environ.get('BOT_TOKEN')  # ← GitHub Secret ကနေ ယူမယ်
+bot_token = os.environ.get('8850525377:AAEf1k13YKbFqHHaVNEGhwaO_2vscM6BP3w')  # ← GitHub Secret ကနေ ယူမယ်
 OWNER_ID = int(os.environ.get("OWNER_ID", 7308292609))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 7308292609))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", '@kiki20251')
