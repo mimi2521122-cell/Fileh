@@ -53,21 +53,21 @@ def keep_alive():
     print("🟣 Flask Keep-Alive started.")
 
 # ========== BOT CONFIGURATION ==========
-TOKEN = os.environ.get("BOT_TOKEN", '8850525377:AAF8AJIqjC-6jcddGDnbY_FD08ntJ_ckHGY')
+TOKEN = os.environ.get("BOT_TOKEN", '8850525377:AAEf1k13YKbFqHHaVNEGhwaO_2vscM6BP3w')
 OWNER_ID = int(os.environ.get("OWNER_ID", 7308292609))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 7308292609))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", '@kiki20251')
 
 DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'devraw_bot.db')
 
-DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628,-1002409342922]
-DEFAULT_FORCE_GROUP_ID = -1002409342922
+DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628]
+DEFAULT_FORCE_GROUP_ID = -1002236605624
 DEFAULT_CHANNEL_LINKS = {
     -1002236605624: "https://t.me/KMM_MOD1",
     -1003068786628: "https://t.me/Sketchware_Beginner_Developer",
-    -1002409342922: "https://t.me/taka1251"
+    -1002409342922: "https://t.me/M_MOD1"
 }
-DEFAULT_GROUP_LINK = "https://t.me/taka1251"
+DEFAULT_GROUP_LINK = "https://t.me/M_MOD1"
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_BOTS_DIR = os.path.join(BASE_DIR, 'upload_bots')
