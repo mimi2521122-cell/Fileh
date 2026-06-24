@@ -1,1 +1,1 @@
-web: python hostreal.py
+web: python main.py
