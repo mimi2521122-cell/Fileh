@@ -59,14 +59,14 @@ def keep_alive():
     print("🟣 Flask Keep-Alive started.")
 
 # ========== BOT CONFIGURATION ==========
-bot_token = '8850525377:AAGFU3pP8Owurbe9E3Np_oefTKZbFAjTL2U'
+bot_token = '8850525377:AAEf1k13YKbFqHHaVNEGhwaO_2vscM6BP3w'
 OWNER_ID = int(os.environ.get("OWNER_ID", 7308292609))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 7308292609))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", '@kiki20251')
 
 DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'dev-KiKi_bot.db')
 
-DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628]
+DEFAULT_FORCE_CHANNEL_IDS = [-1002236605624,-1003068786628,-1002236605624]
 DEFAULT_FORCE_GROUP_ID = -1002236605624
 DEFAULT_CHANNEL_LINKS = {
     -1002236605624: "https://t.me/KMM_MOD1",
